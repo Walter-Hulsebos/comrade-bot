@@ -5,6 +5,7 @@ r"""
 \___/\___/_/_/_/_/  \_,_/\_,_/\__/ 
 
 A bot by turtlebasket
+Edited by Walter H.
 """
 
 import asyncio
@@ -56,10 +57,6 @@ async def status_loop():
 
         await bot.change_presence(activity=discord.Game(name=">>help"))
         await asyncio.sleep(STATUS_LOOP)
-
-        await bot.change_presence(activity=discord.Game(name="Proletarian Uprising 2: Electric Boogaloo"))
-        await asyncio.sleep(STATUS_LOOP)
-
 
 # top.gg API interaction handling (boilerplate)
 class TopGG(commands.Cog):
@@ -130,39 +127,14 @@ async def help(ctx):
     )
 
     embed.add_field(inline=False,
-        name="`>>shibe`",
-        value="Random shibe :dog: :eyes:"
-    )
-
-    embed.add_field(inline=False,
-        name="`>>cat`",
-        value="Random cat :cat: :cat2:"
-    )
-
-    embed.add_field(inline=False,
-        name="`>>birb`",
-        value="Random birb :bird: :hatching_chick:"
-    )
-    
-    embed.add_field(inline=False,
         name="`>>ping`",
         value="Get bot latency."
-    )
-
-    embed.add_field(inline=False,
-        name="Enjoying Comrade?",
-        value="[Upvote Comrade on Discord Bot List!](https://top.gg/bot/592852914553487370/vote)"
-    )
-
-    embed.add_field(inline=False,
-        name="Need help?",
-        value="[Report an issue](https://github.com/turtlebasket/comrade-bot/issues)"
     )
 
     await ctx.send(embed=embed)
 
 
-@bot.command(aliases=['addemote', 'addemoji', 'addEmoji'])
+@bot.command(aliases=['addemote', 'addEmote', 'AddEmote', 'emote', 'Emote', 'addemoji', 'addEmoji', 'AddEmoji', 'emoji', 'Emoji'])
 async def addEmote(ctx, emote_name: str):
     """
     command: addEmote
@@ -193,35 +165,6 @@ async def addEmote(ctx, emote_name: str):
         except:
             await ctx.send(":warning: `There was an error adding emote {}.`".format(emote_name))
 
-
-@bot.command()
-async def shibe(ctx):
-    # with urllib.request.urlopen("http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true") as json_return:
-    with urlopen(Request(url="http://shibe.online/api/shibes?count=1&urls=true&httpsUrls=true", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
-        shibe_contents = json_return.read()
-        msg="{0}, here is your random shibe:".format(ctx.message.author.name)
-        url=json.loads(shibe_contents)[0]
-    await ctx.send(embed=imgfun(msg, url))
-
-@bot.command(aliases=['bird'])
-async def birb(ctx):
-    with urlopen(Request(url="http://random.birb.pw/tweet.json", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
-        # get image filename
-        birb_contents = json_return.read()
-        msg="{0}, here is your random birb:".format(ctx.message.author.name)
-        # insert image filename into URL
-        url="http://random.birb.pw/img/{}".format(json.loads(birb_contents)["file"])
-    await ctx.send(embed=imgfun(msg, url))
-
-@bot.command(aliases=['kitty', 'kitti'])
-async def cat(ctx):
-    with urlopen(Request(url="http://aws.random.cat/meow", headers={'User-Agent': 'Mozilla/5.0'})) as json_return:
-        # get image filename
-        cat_contents = json_return.read()
-        msg="{0}, here is your random cat:".format(ctx.message.author.name)
-        # insert image filename into URL
-        url=json.loads(cat_contents)["file"]
-    await ctx.send(embed=imgfun(msg, url))
     
 @bot.command(aliases=['latency'])
 async def ping(ctx):
@@ -312,7 +255,7 @@ async def ban(ctx, target_user:discord.User):
     if vote_passed:
         try:
             await ctx.guild.ban(target_user)
-            await ctx.send("🦀🦀 `{}` IS GONE 🦀🦀".format(target_user.name))
+            await ctx.send("🦀🦀 `{}` IS GONE 🦀🦀 https://www.youtube.com/watch?v=LDU_Txk06tM".format(target_user.name))
         except discord.ext.commands.errors.CommandInvokeError:
             await error_admin_targeted(ctx)
 
